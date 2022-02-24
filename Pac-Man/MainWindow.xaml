@@ -1,0 +1,59 @@
+﻿<Window x:Class="Pac_Man.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Pac_Man"
+        xmlns:local1="clr-namespace:Pac_Man.View_Model"
+        xmlns:local2="clr-namespace:Pac_Man.Model"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="500" Width="1000" Loaded="Window_Loaded" d:DataContext="{d:DesignInstance Type=local1:ViewModel}" PreviewKeyDown="Window_PreviewKeyDown" KeyUp="Window_KeyUp" Closing="Window_Closing" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <local1:PositionStateToBool x:Key="PtoB"/>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="820"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Canvas x:Name="CanvasDraw" Background="Black" Height="400" Width="800" Grid.Row="1" Margin="10,5,32,14" MouseUp="Canvas_MouseUp" HorizontalAlignment="Left">
+            <Image Name="DisplayImage"/>
+        </Canvas>
+        <Grid Grid.Row="1" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="35"/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="Current Score: " HorizontalAlignment="Left" VerticalAlignment="Top"  FontSize="20" Margin="5" Height="20"/>
+            <TextBlock Text="{Binding Path=CurrentScore}" HorizontalAlignment="Left" VerticalAlignment="Top"  Grid.Row="1" FontSize="20"  Margin="5" Height="20"/>
+            <TextBlock Text="Highest Score: " HorizontalAlignment="Left" VerticalAlignment="Top"  Grid.Row="3" FontSize="20"  Margin="5" Height="20"/>
+            <TextBlock Text="{Binding Path=HighiestScore}" HorizontalAlignment="Left" VerticalAlignment="Top"  Grid.Row="4" FontSize="20"  Margin="5" Height="30"/>
+
+
+        </Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <ToggleButton  Margin="10,5" x:Name="Wall_BT" Content="Wall" Click="Wall_BT_Click" IsChecked="{Binding Path=PositionState}"/>
+            <ToggleButton Margin="10,5" Grid.Column="1" x:Name="Common_BT" Content="Common Bean" Click="Common_BT_Click" />
+            <ToggleButton Margin="10,5" Grid.Column="2" x:Name="Special_BT" Content="Special Bean" Click="Special_BT_Click" />
+            <Button Margin="10,5" Grid.Column="3" Name="BT_Save" Content="Save" Click="BT_Save_Click"/>
+            <Button Margin="10,5" Grid.Column="4" Name="BT_Load" Content="Load" Click="BT_Load_Click"/>
+            <Button Margin="10,5" Grid.Column="5" Name="BT_Play" Content="Start/Restart" Click="BT_Play_Click"  Background="Red"/>
+        </Grid>
+
+    </Grid>
+</Window>
